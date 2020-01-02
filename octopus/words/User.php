@@ -18,11 +18,13 @@ class User extends OwlWordMother{
 	public $birth_date;			const birth_date_type = "DATETIME";
 	public $gender;				const gender_type = "INT(1) UNSIGNED";
 	public $national_id;		const national_id_type = "VARCHAR(10)";
-	// address 
+	// address
+    public $geolocation;        const geolocation_type = "JSONOBJECT";
 	public $city_code;			const city_code_type = "INT UNSIGNED";
 	public $address;			const address_type = "TEXT";
 	public $postal_code;		const postal_code_type = "VARCHAR(11)";
 	// education
+    public $personal_code;      const personal_code_type = "VARCHAR(20)";
 	public $education_school;	const education_school_type = "VARCHAR(100)";
 	public $education_field;	const education_field_type = "VARCHAR(100)";
 	public $education_grade;	const education_grade_type = "VARCHAR(100)";
