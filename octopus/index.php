@@ -17,16 +17,18 @@ require "config.php";
 	// 3rd Party APIs, Libraries and Plugins
 	require("resources/requirements.php");
 
-	// Dev-Defined Classes
-	spl_autoload_register(function($class){
-		if(file_exists("classes/$class.php"))
-			include("classes/$class.php");
-	});
-// ******************************* WORD *******************************
-	spl_autoload_register(function($word){
-		if(file_exists("words/$word.php"))
-			include("words/$word.php");
-	});
+// ******************************* WORD+ *******************************
+    // Word
+    spl_autoload_register(function($word){
+            if(file_exists("words/$word.php"))
+                include("words/$word.php");
+        });
+
+    // Dev-Defined Classes
+    spl_autoload_register(function($class){
+        if(file_exists("classes/$class.php"))
+            include("classes/$class.php");
+    });
 // ***************************** LISTENER *****************************
 	require "listener.php";
 	listener()->respond();

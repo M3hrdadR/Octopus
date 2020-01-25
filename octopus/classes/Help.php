@@ -14,4 +14,15 @@ class Help{
             return false;
         return true;
     }
+
+    static function validate_user($user, $token){
+        $array = $user->access_token;
+        foreach ($array as $item){
+            if($item->token==$token)
+                return true;
+        }
+        return false;
+    }
+
+
 }
