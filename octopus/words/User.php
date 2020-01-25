@@ -34,7 +34,7 @@ class User extends OwlWordMother{
 	public $job_field;			const job_field_type = "INT UNSIGNED";
 	public $job_start_year;		const job_start_year_type = "INT UNSIGNED";
 	// other info 
-	public $access_token;		const access_token_type = "JSONOBJECT";
+	public $access_token;		const access_token_type = "JSONARRAY";
 	public $cases;				const cases_type = "JSONARRAY";
     public $score;				const score_type = "INT UNSIGNED";
     public $join_date;			const join_date_type = "DATETIME";
