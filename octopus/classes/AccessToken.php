@@ -2,9 +2,11 @@
 
 class AccessToken{
     public $token = null;
-    public $mac_addresss = null;
-    function __construct($token, $mac_addresss){
+    public $ip = null;
+    public $id = null;
+    function __construct($token, $ip, $id){
         $this->token = $token;
-        $this->mac_addresss = $mac_addresss;
+        $this->ip = $ip;
+        $this->id = $id;
     }
 }

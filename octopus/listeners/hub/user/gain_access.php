@@ -15,7 +15,7 @@ class ERR extends ERRMother{
 class OwlRequest extends OwlRequestMother{
 	public $sms_code = null;
 	public $phone = null;
-	public $mac_address = null;
+	public $ip = null;
 	// public $mac_address = null;
 }
 
@@ -33,7 +33,7 @@ function owl_listener($data){
     if (!(Help::validate_phone($phone)))
         return new OwlResponse(ERR::BAD_PHONE_NUMBER);
 
-
+    // checking that sms_code can be true or not.
     if(!is_numeric($sms_code) or strlen($sms_code) != 4)
         return new OwlResponse(ERR::BAD_SMS_CODE);
 
@@ -45,15 +45,24 @@ function owl_listener($data){
 	if(!$users)
 	    return new OwlResponse(ERR::USER_NOT_FOUND);
 
+	// checking that user entered the code correctly or not.
 	$user=$users[0];
 	if(!isset($user->sms_data->code) or $user->sms_data->code != $sms_code)
 	    return new OwlResponse(ERR::BAD_SMS_CODE);
-	$user->access_token = new AccessToken(md5($user->phone.rand(10000,99999).time()), $mac_address);
-	$user->sms_data = null;
+
+	// giving access to user.
+	$id = 1;
+	if (sizeof($user->access_token) != 0)
+	    $id = $user->access_token[sizeof($user->access_token) -1]->id + 1;
+    $new_access_token = new AccessToken(md5($user->phone.rand(10000,99999).time()), $ip, $id);
+    array_push($user->access_token, $new_access_token);
+    $user->sms_data = null;
+    //    $user->access_token = new AccessToken(md5($user->phone.rand(10000,99999).time()), $mac_address, );
+
 	if(!$user->update())
 	    return new OwlResponse(ERR::INTERNAL);
 
 	return new OwlResponse([
-	    "access_token" => $user->access_token
+	    "access_token" => $new_access_token
     ]);
 }

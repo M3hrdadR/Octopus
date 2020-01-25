@@ -30,7 +30,8 @@ function owl_listener($data){
 	    return new OwlResponse(ERR::BAD_PHONE_NUMBER);
 
 
-    $sms_code=rand(1000,9999);
+//    $sms_code=rand(1000,9999);
+    $sms_code = 1234;
     // check if user exists
 
     $search_user=new User();
