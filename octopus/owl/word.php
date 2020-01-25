@@ -58,7 +58,7 @@ class OwlWordMother{
 		return true;
 	}
 
-	public function insert(&$id = null){
+	public function insert(){
 		$con = self::connect();
 		if(!$con)
 			return false;
@@ -101,7 +101,7 @@ class OwlWordMother{
 			return false;
 		}
 		
-		$id = $con->insert_id;
+		$this->id = $con->insert_id;
 		$con->close();
 		return true;
 
