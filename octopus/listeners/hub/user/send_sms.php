@@ -44,7 +44,7 @@ function owl_listener($data){
         if(isset($user->sms_data->generation_time) and time() - $user->sms_data->generation_time <= 60)
             return new OwlResponse(ERR::TOO_MANY_REQUESTS);
 
-        $user->sms_data=new SmsData($sms_code);
+        $user->sms_data = new SmsData($sms_code);
         if(!$user->update())
             return new OwlResponse(ERR::INTERNAL);
     }

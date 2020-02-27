@@ -57,12 +57,18 @@ function owl_listener($data){
     $new_access_token = new AccessToken(md5($user->phone.rand(10000,99999).time()), $ip, $id);
     array_push($user->access_token, $new_access_token);
     $user->sms_data = null;
-    //    $user->access_token = new AccessToken(md5($user->phone.rand(10000,99999).time()), $mac_address, );
 
-	if(!$user->update())
+    // if we have a  new  user we'll set his information privacy.
+    if (!isset($user->privacy->username)){
+        $new_privacy = new Privacy();
+        $user->privacy = $new_privacy;
+    }
+
+    // applying changes to db.
+    if(!$user->update())
 	    return new OwlResponse(ERR::INTERNAL);
 
 	return new OwlResponse([
-	    "access_token" => $new_access_token
+	    "access_token" => $new_access_token,
     ]);
 }
